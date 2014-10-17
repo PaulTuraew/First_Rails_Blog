@@ -6,7 +6,7 @@ class Post < ActiveRecord::Base
 
   def self.search(query)
     # where(:title, query) -> This would return an exact match of the query
-    where("body like ?", "%#{query}%")
+    where("body LIKE ? OR subject LIKE?", "%#{query}%")
   end
 
 end
