@@ -1,10 +1,16 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :destroy] #before any action, call :set_post
 
   # GET /posts
   # GET /posts.json
   def index #where display to user
     @posts = Post.chrono_limit
+
+    if params[:search]
+      @posts = Post.search(params[:search]).order("created_at DESC")
+    else
+      @posts = Post.order("created_at DESC")
+    end
   end
 
   # GET /posts/1
@@ -13,7 +19,7 @@ class PostsController < ApplicationController
   end
 
   # GET /posts/new
-  def new
+  def new #Post.new just a new class that also knows about ActiveRecord
     @post = Post.new
   end
 
@@ -61,7 +67,7 @@ class PostsController < ApplicationController
     end
   end
 
-  private
+  private #helper method and not an action
     # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])

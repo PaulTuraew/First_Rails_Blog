@@ -4,4 +4,9 @@ class Post < ActiveRecord::Base
     order('published_at DESC').limit(10)
   end
 
+  def self.search(query)
+    # where(:title, query) -> This would return an exact match of the query
+    where("body like ?", "%#{query}%")
+  end
+
 end
