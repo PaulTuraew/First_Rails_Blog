@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :posts
 
+root :to => 'home#welcome'
   # resources :posts do
   #   get 'search', on: :collection
   # end
