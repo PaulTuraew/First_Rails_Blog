@@ -9,7 +9,8 @@ table {
 }
 
 h1 {
-  color: #BCD2EE;
+  color: white;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
   margin: 0 auto;
   padding: 20px 20px 20px 20px;
   background: #616161;
@@ -20,6 +21,17 @@ h1 {
 
 tr {
   color: #3333CC;
+    font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+}
+
+#posts_link {
+  color: red;
+  font-size: large;
+}
+
+#other_stuff {
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+;
 }
 
 
