@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 feature "Manage Posts" do
-  scenario "List no Albums" do
-    visit albums_path
+  scenario "See list of blogs" do
+    visit posts_path
     expect(page.find('h1')).to have_content(/Albums/i)
     expect(page).to have_content(/No albums available/i)
   end
