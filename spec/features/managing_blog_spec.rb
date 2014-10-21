@@ -1,39 +1,50 @@
 require 'rails_helper'
 
 feature "Manage Posts" do
-  scenario "See list of blogs" do
+
+def create_post
+  Post.create!(#capybara creates a test database it should clear out when test runs
+  subject: 'this is my subject',
+  body: 'blah blah blogy blog',
+  published_at: '2014-10-21'
+  )
+end
+
+  scenario "See list of blog posts" do
+    create_post
     visit posts_path
-    expect(page.find('h1')).to have_content(/Albums/i)
-    expect(page).to have_content(/No albums available/i)
+    expect(page).to have_content("this is my subject")
   end
 
-  scenario "List all Albums" do
-    Album.create!(
-      title: 'Astrolounge',
-      artist: 'Smash Mouth',
-      year: '1999'
-    )
-
-    visit albums_path
-    expect(page.find('.album')).to have_content(/Astrolounge/)
-    expect(page.find('.artist')).to have_content(/Smash Mouth/)
-    expect(page.find('.year')).to have_content(/1999/)
-    expect(page).not_to have_content(/No albums available/i)
-
-    expect(page).to have_button('Add New Album')
-
+  scenario "User can click the create new button and be directed to a new page with a form" do
+    create_post
+    visit posts_path
+    click_on('Create New Post')
+    visit new_post_path
   end
 
-  scenario "Add new Album" do
-    visit new_album_path
+end
 
-    fill_in 'album_title', with: 'Red'
-    fill_in 'album_artist', with: 'Taylor Swift'
-    fill_in 'album_year', with: '2012'
-    click_on 'Create Album'
+#   scenario "List all Posts" do
+#     create_posts
 
-    expect(current_path).to eq(album_path(Album.last.id))
-    expect(find('.notice')).to have_content(/success/i)
+#     visit posts_path
+
+#     expect(page.find('.subject')).to have_content(/Test Post/)
+#     expect(page.find('.body')).to have_content(/Test Post/)
+#     expect(page.find('.published_at')).to have_content(/Test Post/)
+# end
+# scenario "Edit Posts"
+# end
+
+# scenario "Delete post and redirect to index" do
+#   post = create_post
+
+#   cisit post_path(post)
+#   click_on 'Destroy'
+
+#   expect(current_path).to eq(posts_path)
+#   expect(posts_path).to_not have_content("blah")
+# end
 
 
-  end
