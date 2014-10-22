@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :posts
+  resources :users
+  get '/signup', to: 'users#new'
 
 root :to => 'home#welcome'
   # resources :posts do
