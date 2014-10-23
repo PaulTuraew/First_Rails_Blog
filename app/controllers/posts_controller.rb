@@ -4,13 +4,17 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index #where display to user
-    @posts = Post.chrono_limit
-
-    if params[:search]
-      @posts = Post.search(params[:search]).order("created_at DESC")
+    @posts = if params[:search]
+      Post.search(params[:search]).sorted.published
     else
-      @posts = Post.order("created_at DESC")
+      Post.sorted.latest.published
     end
+    # OR THIS WAY
+    # if params[:search]
+    #   @posts = Post.search(params[:search]).sorted
+    # else
+    #   @posts = Post.sorted.latest
+    # end
   end
 
   # GET /posts/1

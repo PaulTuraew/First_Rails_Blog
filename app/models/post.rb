@@ -1,8 +1,7 @@
 class Post < ActiveRecord::Base
-
-  def self.chrono_limit
-    order('published_at DESC').limit(10)
-  end
+  scope :latest, -> { limit(10) }
+  scope :sorted, -> { order('published_at DESC') }
+  scope :published, -> { where(draft: false) }
 
   def self.search(query)
     # where(:title, query) -> This would return an exact match of the query
