@@ -1,4 +1,4 @@
-#test save
+#test save #2
 class User < ActiveRecord::Base
 
   #add save handlers for formatting data
